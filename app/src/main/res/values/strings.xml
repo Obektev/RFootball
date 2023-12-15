@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RFootball</string>
+    <string name="rfootball_calendar">RFootball Calendar</string>
+    <string name="comands_top">Рейтинг</string>
+    <string name="results">Результаты</string>
+    <string name="agenda">Календарь</string>
+</resources>
