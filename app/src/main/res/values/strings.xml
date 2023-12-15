@@ -3,5 +3,7 @@
     <string name="rfootball_calendar">RFootball Calendar</string>
     <string name="comands_top">Рейтинг</string>
     <string name="results">Результаты</string>
-    <string name="agenda">Календарь</string>
+    <string name="agenda">Расписание соревнований</string>
+    <string name="leaders">Лидеры</string>
+    <string name="create_new_partisapatements">Создать новые соревнования</string>
 </resources>

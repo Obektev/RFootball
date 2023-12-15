@@ -4,11 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import Utils.DateUtils;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,45 +32,77 @@ public class MainActivity extends AppCompatActivity {
 
         calendarGrid = findViewById(R.id.calendarGrid);
 
-        List<String> dateList = generateDateList(); // Список дат
+        List<String> datesList = DateUtils.generateDateList("15/12/2023", 30);
 
-        // Добавляем ячейки в GridLayout
-        for (String date : dateList) {
-            addCalendarCell(date);
-        }
+        generateDateList(datesList);
     }
 
-    private List<String> generateDateList() {
-        List<String> dateList = new ArrayList<>();
+    private void generateDateList(List<String> dates) {
 
-        for (int i = 0; i < 30; i++) {
-            addCalendarCell(String.valueOf(i) + "\ndec");
+        for (String date : dates) {
+            addCalendarCell(date);
         }
 
-        return dateList;
+        // Пустышка для правильного отображения спика снизу
+        View separator = new View(getApplicationContext());
+        separator.setLayoutParams(new ViewGroup.LayoutParams(1, 200));
+        calendarGrid.addView(separator);
+
     }
 
     private void addCalendarCell(String date) {
-        CardView cell = new CardView(this);
-        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-        params.width = getResources().getDimensionPixelSize(R.dimen.cell_width);
-        params.height = getResources().getDimensionPixelSize(R.dimen.cell_height);
-        params.setMargins(5, 5, 5, 5);
+        Log.d("addCalendarCell", date + " added");
+        // Create a new CardView
+        CardView cardView = new CardView(getApplicationContext());
 
-        cell.setLayoutParams(params);
-        cell.setCardElevation(5f);
-        cell.setRadius(8f);
+        // Set layout parameters for the CardView
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+        params.width = dpToPx(150); // Convert dp to pixels
+        params.height = dpToPx(150); // Convert dp to pixels
+        params.setMargins(dpToPx(5), dpToPx(5), dpToPx(5), dpToPx(5)); // Convert dp to pixels
+        params.setGravity(Gravity.CENTER);
+
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayout.setLayoutParams(params);
+
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(R.drawable.calendar_svgrepo_com);
+
+        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        imageParams.gravity = Gravity.START;
+        imageParams.topMargin = 10;
+        imageParams.width = 130;
+        imageParams.height = 130;
+        imageView.setLayoutParams(imageParams);
 
         TextView textView = new TextView(this);
-        textView.setLayoutParams(new CardView.LayoutParams(
-                CardView.LayoutParams.MATCH_PARENT,
-                CardView.LayoutParams.MATCH_PARENT
-        ));
         textView.setText(date);
-        textView.setGravity(android.view.Gravity.CENTER);
+        textView.setTextSize(20);
 
-        cell.addView(textView);
-        calendarGrid.addView(cell);
+        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        textParams.gravity = Gravity.START;
+        textParams.topMargin = 10;
+        textView.setLayoutParams(textParams);
+
+        // Add ImageView and TextView to the LinearLayout
+        linearLayout.addView(imageView);
+        linearLayout.addView(textView);
+
+        cardView.addView(linearLayout);
+
+        cardView.setRadius(dpToPx(8)); // Convert dp to pixels
+        cardView.setCardElevation(dpToPx(5)); // Convert dp to pixels
+
+        cardView.setLayoutParams(params);
+        calendarGrid.addView(cardView);
     }
-
+    private int dpToPx(float dp) {
+        float density = getResources().getDisplayMetrics().density;
+        return Math.round(dp * density);
+    }
 }
