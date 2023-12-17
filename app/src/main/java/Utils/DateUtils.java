@@ -13,19 +13,16 @@ public class DateUtils {
     public static List<String> generateDateList(String startDate, int numberOfDays) {
         List<String> dateList = new ArrayList<>();
 
-        // Define the input and output date formats
-        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd MMM yy", new Locale("ru", "RU"));
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM yy", new Locale("ru", "RU"));
 
         try {
-            // Parse the input start date
             Date currentDate = inputFormat.parse(startDate);
 
-            // Add each formatted date to the list
             for (int i = 0; i < numberOfDays; i++) {
+                assert currentDate != null;
                 dateList.add(outputFormat.format(currentDate));
 
-                // Increment the date by one day
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(currentDate);
                 calendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -34,7 +31,12 @@ public class DateUtils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return dateList;
+    }
+
+    public static String getCurrentDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yy", new Locale("ru", "RU"));
+
+        return dateFormat.format(new Date());
     }
 }

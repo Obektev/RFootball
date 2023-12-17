@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/aldrich"
+            android:fontFamily="@font/aldrichrusbydaymarius"
             android:background="@drawable/round_shape"
             android:backgroundTint="#fff"
             android:elevation="3dp"
@@ -59,7 +59,7 @@
             android:backgroundTint="#fff"
             android:elevation="3dp"
             android:translationZ="3dp"
-            app:layout_constraintBottom_toTopOf="@+id/leader_board_table"
+            app:layout_constraintBottom_toTopOf="@+id/leaders_table_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,11 +79,22 @@
                 android:text="@string/agenda"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="15sp"
+                android:textSize="20sp"
+                android:fontFamily="@font/aldrichrusbydaymarius"
                 android:translationZ="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/empty_stack_textview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/empty_stack"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:fontFamily="@font/aldrichrusbydaymarius"
+                android:textColor="#888" />
 
             <ScrollView
                 android:layout_width="wrap_content"
@@ -117,27 +128,29 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/leader_board_table"
+            android:id="@+id/leaders_table_button"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/button_shape"
             android:translationZ="30dp"
+            android:fontFamily="@font/aldrichrusbydaymarius"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/create_versus"
+            app:layout_constraintEnd_toStartOf="@+id/create_new_company"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/leaders"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/create_versus"
+            android:id="@+id/create_new_company"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/button_shape"
             android:translationZ="30dp"
+            android:fontFamily="@font/aldrichrusbydaymarius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/leader_board_table"
+            app:layout_constraintStart_toEndOf="@+id/leaders_table_button"
             android:text="@string/create_new_partisapatements"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
